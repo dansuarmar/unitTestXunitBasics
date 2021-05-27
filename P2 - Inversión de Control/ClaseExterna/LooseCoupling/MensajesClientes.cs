@@ -2,6 +2,7 @@
 
 namespace ClaseExterna.LooseCoupling
 {
+    //MensajesClientes.cs
     public class MensajesClientes
     {
         IClientesRepository _clientesRepository; //Interfaz en vez de clase.

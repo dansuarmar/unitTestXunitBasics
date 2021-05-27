@@ -1,22 +1,17 @@
 ﻿using System.Collections.Generic;
+using ClaseExterna.StrongCoupling;
 
 //MensajesClientes.cs
-namespace ClaseExterna.StrongCoupling
+namespace ClaseExterna
 {
     public class MensajesClientes
     {
-        ClientesRepository _clientesRepository;
-
-        public MensajesClientes(ClientesRepository clienteRepository) 
-        {
-            _clientesRepository = clienteRepository;
-        }
-
         public List<string> CrearSaludosClientes()
         {
-            var clientes = _clientesRepository.GetAll();
+            var clienteRepository = new ClientesRepository();
+            var clientes = clienteRepository.GetAll();
             var resuesta = new List<string>();
-            foreach (var cliente in clientes) 
+            foreach (var cliente in clientes)
             {
                 var mensaje = "Hola " + cliente.Nombre + " " + cliente.Apellido;
                 resuesta.Add(mensaje);

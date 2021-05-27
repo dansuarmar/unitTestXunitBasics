@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace ClaseExterna.LooseCoupling
 {
+    //ClientesRepository.cs
     public class ClientesRepository : IClientesRepository
     {
         public List<Cliente> GetAll()

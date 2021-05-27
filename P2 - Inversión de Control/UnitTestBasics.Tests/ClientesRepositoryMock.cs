@@ -6,27 +6,28 @@ using ClaseExterna.LooseCoupling;
 
 namespace UnitTestBasics.Tests
 {
-    public class ClientesRepositoryMock : IClientesRepository
+//ClientesRepositoryMock.cs
+public class ClientesRepositoryMock : IClientesRepository
+{
+    public List<Cliente> GetAll()
     {
-        public List<Cliente> GetAll()
+        var clientes = new List<Cliente>()
         {
-            var clientes = new List<Cliente>()
+            new Cliente()
             {
-                new Cliente()
-                {
-                    IdCliente = Guid.NewGuid(),
-                    Nombre = "Pedro",
-                    Apellido = "Paramo",
-                },
-                new Cliente()
-                {
-                    IdCliente = Guid.NewGuid(),
-                    Nombre = "Juan",
-                    Apellido = "Rulfo",
-                },
-            };
+                IdCliente = Guid.NewGuid(),
+                Nombre = "Pedro",
+                Apellido = "Paramo",
+            },
+            new Cliente()
+            {
+                IdCliente = Guid.NewGuid(),
+                Nombre = "Juan",
+                Apellido = "Rulfo",
+            },
+        };
 
-            return clientes;
-        }
+        return clientes;
     }
+}
 }
