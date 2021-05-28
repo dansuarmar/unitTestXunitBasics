@@ -2,6 +2,6 @@
 {
     public interface ICorreosService
     {
-        bool Send(string Emails, string Titulo, string Mensaje);
+        void Send(string Emails, string Titulo, string Mensaje);
     }
 }

@@ -2,9 +2,9 @@
 {
     public class CorreosService : ICorreosService
     {
-        public bool Send(string Emails, string Titulo, string Mensaje)
+        public void Send(string Emails, string Titulo, string Mensaje)
         {
-            return true;
+            //Código para mandar el correo.
         }
     }
 }

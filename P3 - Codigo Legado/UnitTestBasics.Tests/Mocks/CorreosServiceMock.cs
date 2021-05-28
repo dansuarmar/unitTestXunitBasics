@@ -5,18 +5,20 @@ using ClaseExterna.LooseCoupling;
 
 namespace UnitTestBasics.Tests.Mocks
 {
+    //CorreosServiceMock.cs
     public class CorreosServiceMock : ICorreosService
     {
         bool _correoEnviado;
 
-        public CorreosServiceMock(bool correoEnviado) 
+        public CorreosServiceMock(bool simularCorreoEnviado) 
         {
-            _correoEnviado = correoEnviado;
+            _correoEnviado = simularCorreoEnviado;
         }
 
-        public bool Send(string Emails, string Titulo, string Mensaje)
+        public void Send(string Emails, string Titulo, string Mensaje)
         {
-            return _correoEnviado;
+            if (!_correoEnviado)
+                throw new Exception("Error al enviar correo.");
         }
     }
 }

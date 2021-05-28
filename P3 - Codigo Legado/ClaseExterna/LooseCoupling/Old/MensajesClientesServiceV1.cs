@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ClaseExterna.LooseCoupling.Old
 {
+    //MensajesClientesService.cs
     public class MensajesClientesService
     {
-        //MensajesClientesService.cs
         IClienteService clienteService;
         ICorreosService correosService;
         IMensajeRepository mensajesRepository;
@@ -35,7 +35,16 @@ namespace ClaseExterna.LooseCoupling.Old
             if (cliente.EnviarCorreos)
             {
                 //var servicioCorreos = new CorreosService();
-                msgRes.Enviado = correosService.Send(msgRes.EMailCliente, msgRes.Titulo, msgRes.Contenido);
+                try
+                {
+                    correosService.Send(msgRes.EMailCliente, msgRes.Titulo, msgRes.Contenido);
+                    msgRes.Enviado = true;
+                }
+                catch 
+                {
+                    msgRes.Enviado = false;
+                }
+
             }
             else
                 msgRes.Enviado = false;

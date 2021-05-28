@@ -10,6 +10,7 @@ namespace ClaseExterna.LooseCoupling
         ICorreosService correosService;
         IMensajeRepository mensajesRepository;
 
+        //Primer Constructor
         public MensajesClientesService() 
         {
             clienteService = new ClienteService();
@@ -17,6 +18,7 @@ namespace ClaseExterna.LooseCoupling
             mensajesRepository = new MensajeRepository();
         }
 
+        //Segundo Constructor
         public MensajesClientesService(IClienteService clnSrv, ICorreosService corSrv, IMensajeRepository msgRep) 
         {
             clienteService = clnSrv;
@@ -42,7 +44,15 @@ namespace ClaseExterna.LooseCoupling
             if (cliente.EnviarCorreos)
             {
                 //var servicioCorreos = new CorreosService();
-                msgRes.Enviado = correosService.Send(msgRes.EMailCliente, msgRes.Titulo, msgRes.Contenido);
+                try
+                {
+                    correosService.Send(msgRes.EMailCliente, msgRes.Titulo, msgRes.Contenido);
+                    msgRes.Enviado = true;
+                }
+                catch 
+                {
+                    msgRes.Enviado = false;
+                }
             }
             else
                 msgRes.Enviado = false;

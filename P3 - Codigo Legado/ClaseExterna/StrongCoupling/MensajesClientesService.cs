@@ -23,8 +23,16 @@ namespace ClaseExterna.StrongCoupling
 
             if (cliente.EnviarCorreos)
             {
-                var servicioCorreos = new CorreosService();
-                msgRes.Enviado = servicioCorreos.Send(msgRes.EMailCliente, msgRes.Titulo, msgRes.Contenido);
+                try
+                {
+                    var servicioCorreos = new CorreosService();
+                    servicioCorreos.Send(msgRes.EMailCliente, msgRes.Titulo, msgRes.Contenido);
+                    msgRes.Enviado = true;
+                }
+                catch
+                {
+                    msgRes.Enviado = false;
+                }
             }
             else
                 msgRes.Enviado = false;

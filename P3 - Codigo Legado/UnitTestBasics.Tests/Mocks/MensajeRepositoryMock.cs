@@ -5,11 +5,12 @@ using ClaseExterna.LooseCoupling;
 
 namespace UnitTestBasics.Tests.Mocks
 {
-    public class MensajeRepositoryMock : IMensajeRepository
+//MensajeRepositoryMock.cs
+public class MensajeRepositoryMock : IMensajeRepository
+{
+    public Mensaje Add(Mensaje mensaje)
     {
-        public Mensaje Add(Mensaje mensaje)
-        {
-            return mensaje;
-        }
+        return mensaje;
     }
+}
 }
