@@ -243,3 +243,5 @@ C:\Users\dsuar\Documents\Codigo\unitTestXunitBasics\P5 - API Controller y EF\uni
 C:\Users\dsuar\Documents\Codigo\unitTestXunitBasics\P5 - API Controller y EF\unitTestXunitBasics\unitTestXunitBasics_Tests\obj\Debug\net5.0\ref\unitTestXunitBasics_Tests.dll
 C:\Users\dsuar\Documents\Codigo\unitTestXunitBasics\P5 - API Controller y EF\unitTestXunitBasics\unitTestXunitBasics_Tests\obj\Debug\net5.0\unitTestXunitBasics_Tests.pdb
 C:\Users\dsuar\Documents\Codigo\unitTestXunitBasics\P5 - API Controller y EF\unitTestXunitBasics\unitTestXunitBasics_Tests\obj\Debug\net5.0\unitTestXunitBasics_Tests.genruntimeconfig.cache
+C:\Users\dsuar\Documents\Codigo\unitTestXunitBasics\P5 - API Controller y EF\unitTestXunitBasics\unitTestXunitBasics_Tests\bin\Debug\net5.0\Moq.EntityFrameworkCore.dll
+C:\Users\dsuar\Documents\Codigo\unitTestXunitBasics\P5 - API Controller y EF\unitTestXunitBasics\unitTestXunitBasics_Tests\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.InMemory.dll

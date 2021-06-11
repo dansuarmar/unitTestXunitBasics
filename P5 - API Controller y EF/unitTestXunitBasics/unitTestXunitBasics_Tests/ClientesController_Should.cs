@@ -1,61 +1,128 @@
 using System;
 using Xunit;
-using Moq;
-
-using unitTestXunitBasics.Data;
-using unitTestXunitBasics.Model;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Data.Entity.Infrastructure;
+using unitTestXunitBasics.Data;
+using unitTestXunitBasics.Model;
+using unitTestXunitBasics.Controllers;
 
 namespace unitTestXunitBasics_Tests
 {
     public class ClientesController_Should
     {
-        List<Cliente> clientesDb;
-        Guid idCln1 = Guid.NewGuid();
-        Guid idCln2 = Guid.NewGuid();
-        Mock<DbSet<Cliente>> clnDbSetMock;
+        ApplicationDbContext context;
 
         public ClientesController_Should()
         {
-            clientesDb = new List<Cliente>();
-            clientesDb.Add(new Cliente() 
-            {
-                IdCliente = idCln1,
-                Nombre = "Pedro",
-                Apellido = "Paramo",
-                EMail = "pedro.paramo@juanrulfo.com",
-                EnviarCorreos = true,
-            });
-            clientesDb.Add(new Cliente()
-            {
-                IdCliente = idCln2,
-                Nombre = "Juan",
-                Apellido = "Preciado",
-                EMail = "juan.preciado@juanrulfo.com",
-                EnviarCorreos = true,
-            });
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestDB")
+                .Options;
 
-            var queryble = clientesDb.AsQueryable();
-
-            clnDbSetMock.As<IQueryable<Cliente>>().Setup(m => m.Expression).Returns(queryble.Expression);
-            clnDbSetMock.As<IQueryable<Cliente>>().Setup(m => m.ElementType).Returns(queryble.ElementType);
-            clnDbSetMock.As<IQueryable<Cliente>>().Setup(m => m.GetEnumerator()).Returns(queryble.GetEnumerator);
+            context = new ApplicationDbContext(options);
+            context.Clientes.Add(
+                new Cliente()
+                {
+                    Nombre = "Pedro",
+                    Apellido = "Paramo",
+                    EMail = "pedro.paramo@juanrulfo.com",
+                    EnviarCorreos = true,
+                });
+            context.Clientes.Add(
+                new Cliente()
+                {
+                    Nombre = "Juan",
+                    Apellido = "Preciado",
+                    EMail = "juan.preciado@juanrulfo.com",
+                    EnviarCorreos = true,
+                });
+            context.SaveChangesAsync();
         }
 
         [Fact]
-        public void Test1()
+        public async void GetClientes_Test()
         {
-            var contextMock = new Mock<ApplicationDbContext>();
-            //contextMock.Setup(x => x.Clientes.Add(It.IsAny<Cliente>()))
-            //    .Returns((Cliente cliente) => cliente);
-                //{
-                //    cliente.IdCliente = Guid.NewGuid();
-                //    clientesDb.Add(cliente);
-                //    return cliente;
-                //});
+            //Arrange
+            var sut = new ClientesController(context);
+
+            //Act
+            var resp = await sut.GetClientes();
+            var respList = resp.Value;
+
+            //Assert
+            Assert.NotNull(resp.Value);
+            foreach (var cliente in respList)
+                Assert.NotEqual(Guid.Empty, cliente.IdCliente);
+        }
+
+        [Fact]
+        public async void PutCliente_Test()
+        {
+            //Arrange
+            var sut = new ClientesController(context);
+            var clienteACambiar = context.Clientes.FirstOrDefault();
+            clienteACambiar.Nombre = "Nuevo Nombre";
+            clienteACambiar.Apellido = "Nuevo Apellido";
+
+            //Act
+            var resp = await sut.PutCliente(clienteACambiar.IdCliente, clienteACambiar);
+            var respAsResult = (NoContentResult)resp;
+            var clienteCambiado = context.Clientes.First(m => m.IdCliente == clienteACambiar.IdCliente);
+
+            //Assert
+            Assert.NotNull(respAsResult);
+            Assert.Equal(204, respAsResult.StatusCode);
+            Assert.Equal("Nuevo Nombre", clienteCambiado.Nombre);
+            Assert.Equal("Nuevo Apellido", clienteCambiado.Apellido);
+        }
+
+        [Fact]
+        public async void PostCliente_Test()
+        {
+            //Arrange
+            var newCliente = new Cliente()
+            {
+                Nombre = "Juan",
+                Apellido = "Rulfo",
+                EMail = "juan.rulfo@juanrulfo.com",
+                EnviarCorreos = true,
+            };
+            var sut = new ClientesController(context);
+
+            //Act
+            var resp = await sut.PostCliente(newCliente);
+            var respValue = (CreatedAtActionResult)resp.Result;
+            var respCln = (Cliente)respValue.Value;
+
+            //Assert
+            Assert.NotNull(respValue.Value);
+            Assert.Equal(201, respValue.StatusCode);
+            Assert.NotEqual(Guid.Empty, respCln.IdCliente); //Aqui estamos asumiendo funcionamiento que no es del controlador.
+            Assert.Equal(newCliente.Nombre, respCln.Nombre);
+            Assert.Equal(newCliente.Apellido, respCln.Apellido);
+            Assert.Equal(newCliente.EMail, respCln.EMail);
+            Assert.Equal(newCliente.EnviarCorreos, respCln.EnviarCorreos);
+        }
+
+        [Fact]
+        public async void DeleteCliente_Test()
+        {
+            //Arrange
+            var sut = new ClientesController(context);
+            var clienteABorrar = context.Clientes.FirstOrDefault();
+
+            //Act
+            var resp = await sut.DeleteCliente(clienteABorrar.IdCliente);
+            var respAsResult = (NoContentResult)resp;
+            var clienteBorrado = context.Clientes.FirstOrDefault(m => m.IdCliente == clienteABorrar.IdCliente);
+
+            //Assert
+            Assert.NotNull(respAsResult);
+            Assert.Equal(204, respAsResult.StatusCode);
+            Assert.Null(clienteBorrado);
         }
     }
 }

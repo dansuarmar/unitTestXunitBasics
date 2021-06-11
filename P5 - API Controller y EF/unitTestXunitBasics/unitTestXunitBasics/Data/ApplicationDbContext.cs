@@ -14,7 +14,7 @@ namespace unitTestXunitBasics.Data
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Cliente> Clientes { get; set; } //Importante tiene que ser Virtual para poderse Mock.
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
