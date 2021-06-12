@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace unitTestXunitBasics.Model
 {
+    //Cliente.cs
     public class Cliente
     {
         [Key]

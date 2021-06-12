@@ -1,18 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dsuar\\Documents\\Codigo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj": {}
+    "C:\\Users\\dsuar\\Documents\\Desarrollo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dsuar\\Documents\\Codigo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj": {
+    "C:\\Users\\dsuar\\Documents\\Desarrollo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dsuar\\Documents\\Codigo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj",
+        "projectUniqueName": "C:\\Users\\dsuar\\Documents\\Desarrollo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj",
         "projectName": "unitTestXunitBasics",
-        "projectPath": "C:\\Users\\dsuar\\Documents\\Codigo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj",
+        "projectPath": "C:\\Users\\dsuar\\Documents\\Desarrollo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj",
         "packagesPath": "C:\\Users\\dsuar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dsuar\\Documents\\Codigo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\obj\\",
+        "outputPath": "C:\\Users\\dsuar\\Documents\\Desarrollo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
           "C:\\Users\\dsuar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

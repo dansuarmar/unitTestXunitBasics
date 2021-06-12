@@ -10,6 +10,7 @@ using unitTestXunitBasics.Model;
 
 namespace unitTestXunitBasics.Data
 {
+    //ApplicationDbcontext.cs
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }

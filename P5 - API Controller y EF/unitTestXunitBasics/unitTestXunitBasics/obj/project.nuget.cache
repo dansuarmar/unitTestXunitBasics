@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OxZ6OTNN2CjoiSXsRYwRz2iRBro//5ZFqd9K9D9y6R4i4js9988Fwp1C/zo4tD19Fz3wLhU0ngA8GJAQcT9DpQ==",
+  "dgSpecHash": "F7poKQ+PMXybxOYwvOBB3Pa+rbxyuAx1+bzauIEVX517mUJg8n7fTrFvlHs/mifBhCk7PVFNqSZXBB9twiSlHA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dsuar\\Documents\\Codigo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj",
+  "projectFilePath": "C:\\Users\\dsuar\\Documents\\Desarrollo\\unitTestXunitBasics\\P5 - API Controller y EF\\unitTestXunitBasics\\unitTestXunitBasics\\unitTestXunitBasics.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dsuar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\dsuar\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
@@ -115,7 +115,7 @@
     "C:\\Users\\dsuar\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
     "C:\\Users\\dsuar\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",
     "C:\\Users\\dsuar\\.nuget\\packages\\system.runtime.serialization.formatters\\4.3.0\\system.runtime.serialization.formatters.4.3.0.nupkg.sha512",
-    "C:\\Users\\dsuar\\.nuget\\packages\\system.runtime.serialization.json\\4.3.0\\system.runtime.serialization.json.4.3.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.serialization.json\\4.3.0\\system.runtime.serialization.json.4.3.0.nupkg.sha512",
     "C:\\Users\\dsuar\\.nuget\\packages\\system.runtime.serialization.primitives\\4.3.0\\system.runtime.serialization.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\dsuar\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
     "C:\\Users\\dsuar\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
