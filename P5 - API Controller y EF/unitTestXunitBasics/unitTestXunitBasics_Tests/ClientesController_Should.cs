@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Data.Entity.Infrastructure;
 using unitTestXunitBasics.Data;
 using unitTestXunitBasics.Model;
 using unitTestXunitBasics.Controllers;
@@ -14,7 +13,7 @@ namespace unitTestXunitBasics_Tests
 {
     public class ClientesController_Should
     {
-        ApplicationDbContext context;
+        readonly ApplicationDbContext _context;
 
         public ClientesController_Should()
         {
@@ -22,8 +21,8 @@ namespace unitTestXunitBasics_Tests
                 .UseInMemoryDatabase(databaseName: "TestDB")
                 .Options;
 
-            context = new ApplicationDbContext(options);
-            context.Clientes.Add(
+            _context = new ApplicationDbContext(options);
+            _context.Clientes.Add(
                 new Cliente()
                 {
                     Nombre = "Pedro",
@@ -31,7 +30,7 @@ namespace unitTestXunitBasics_Tests
                     EMail = "pedro.paramo@juanrulfo.com",
                     EnviarCorreos = true,
                 });
-            context.Clientes.Add(
+            _context.Clientes.Add(
                 new Cliente()
                 {
                     Nombre = "Juan",
@@ -39,44 +38,44 @@ namespace unitTestXunitBasics_Tests
                     EMail = "juan.preciado@juanrulfo.com",
                     EnviarCorreos = true,
                 });
-            context.SaveChangesAsync();
+            _context.SaveChangesAsync();
         }
 
         [Fact]
         public async void GetClientes_Test()
         {
             //Arrange
-            var sut = new ClientesController(context);
+            var sut = new ClientesController(_context);
 
             //Act
             var resp = await sut.GetClientes();
-            var respList = resp.Value;
 
             //Assert
-            Assert.NotNull(resp.Value);
-            foreach (var cliente in respList)
-                Assert.NotEqual(Guid.Empty, cliente.IdCliente);
+            Assert.NotEmpty(resp.Value);
         }
 
         [Fact]
         public async void PutCliente_Test()
         {
             //Arrange
-            var sut = new ClientesController(context);
-            var clienteACambiar = context.Clientes.FirstOrDefault();
+            var sut = new ClientesController(_context);
+            var clienteACambiar = _context.Clientes.FirstOrDefault();
             clienteACambiar.Nombre = "Nuevo Nombre";
             clienteACambiar.Apellido = "Nuevo Apellido";
+            clienteACambiar.EMail = "nuevo@corre.com";
+            clienteACambiar.EnviarCorreos = true;
 
             //Act
             var resp = await sut.PutCliente(clienteACambiar.IdCliente, clienteACambiar);
             var respAsResult = (NoContentResult)resp;
-            var clienteCambiado = context.Clientes.First(m => m.IdCliente == clienteACambiar.IdCliente);
 
             //Assert
-            Assert.NotNull(respAsResult);
+            var clienteCambiado = _context.Clientes.First(m => m.IdCliente == clienteACambiar.IdCliente);
             Assert.Equal(204, respAsResult.StatusCode);
             Assert.Equal("Nuevo Nombre", clienteCambiado.Nombre);
             Assert.Equal("Nuevo Apellido", clienteCambiado.Apellido);
+            Assert.Equal("nuevo@corre.com", clienteCambiado.EMail);
+            Assert.True(clienteACambiar.EnviarCorreos);
         }
 
         [Fact]
@@ -90,7 +89,7 @@ namespace unitTestXunitBasics_Tests
                 EMail = "juan.rulfo@juanrulfo.com",
                 EnviarCorreos = true,
             };
-            var sut = new ClientesController(context);
+            var sut = new ClientesController(_context);
 
             //Act
             var resp = await sut.PostCliente(newCliente);
@@ -98,7 +97,6 @@ namespace unitTestXunitBasics_Tests
             var respCln = (Cliente)respValue.Value;
 
             //Assert
-            Assert.NotNull(respValue.Value);
             Assert.Equal(201, respValue.StatusCode);
             Assert.NotEqual(Guid.Empty, respCln.IdCliente); //Aqui estamos asumiendo funcionamiento que no es del controlador.
             Assert.Equal(newCliente.Nombre, respCln.Nombre);
@@ -111,17 +109,16 @@ namespace unitTestXunitBasics_Tests
         public async void DeleteCliente_Test()
         {
             //Arrange
-            var sut = new ClientesController(context);
-            var clienteABorrar = context.Clientes.FirstOrDefault();
+            var sut = new ClientesController(_context);
+            var clienteABorrar = _context.Clientes.FirstOrDefault();
 
             //Act
             var resp = await sut.DeleteCliente(clienteABorrar.IdCliente);
             var respAsResult = (NoContentResult)resp;
-            var clienteBorrado = context.Clientes.FirstOrDefault(m => m.IdCliente == clienteABorrar.IdCliente);
 
             //Assert
-            Assert.NotNull(respAsResult);
             Assert.Equal(204, respAsResult.StatusCode);
+            var clienteBorrado = _context.Clientes.FirstOrDefault(m => m.IdCliente == clienteABorrar.IdCliente);
             Assert.Null(clienteBorrado);
         }
     }

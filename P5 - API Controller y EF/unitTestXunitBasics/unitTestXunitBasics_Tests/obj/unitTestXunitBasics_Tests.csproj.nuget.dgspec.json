@@ -61,10 +61,6 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
-            },
-            "Moq.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[5.0.0.2, )"
             }
           },
           "imports": [
@@ -129,9 +125,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "EntityFramework": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.4.4, )"
+              "version": "[5.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
