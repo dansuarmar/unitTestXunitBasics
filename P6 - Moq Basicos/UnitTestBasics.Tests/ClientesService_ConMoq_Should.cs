@@ -45,7 +45,7 @@ namespace UnitTestBasics.Tests
             Assert.NotEmpty(resp);
         }
 
-        [Fact] 
+[Fact] 
         public void AgregarCliente_HappyPath()
         {
             //Arrange
@@ -72,6 +72,7 @@ namespace UnitTestBasics.Tests
             var resp = sut.AddCliente(cliente);
 
             //Assert
+            clnRepoMock.Verify(mock => mock.Add(cliente), Times.Once);
             Assert.NotEqual(Guid.Empty, resp.IdCliente);
             Assert.Equal(idCliente, resp.IdCliente);
         }

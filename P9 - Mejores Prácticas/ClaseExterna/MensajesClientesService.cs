@@ -8,13 +8,16 @@ namespace ClaseExterna
     {
         MensajeRepository mensajesRepository;
 
-        public MensajesClientesService() 
+        public MensajesClientesService(MensajeRepository msgRepo) 
         {
-            mensajesRepository = new MensajeRepository();
+            mensajesRepository = msgRepo;
         }
 
         public Mensaje AddMensaje(Guid IdCliente, string Titulo, string Contenido) 
         {
+            if (String.IsNullOrWhiteSpace(Titulo))
+                throw new Exception("Titulo no puede ser null");
+
             var msgRes = new Mensaje()
             {
                 IdCliente = IdCliente,
@@ -22,7 +25,7 @@ namespace ClaseExterna
                 Contenido = Contenido,
                 IdMensaje = Guid.NewGuid(),
                 FechaMensaje = DateTime.Now,
-                Enviado = true;
+                Enviado = true,
             };
 
             mensajesRepository.Add(msgRes);

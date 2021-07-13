@@ -71,5 +71,16 @@ namespace UnitTestBasics.Tests
             Assert.Equal(idCliente, respuesta.IdCliente);
             Assert.Equal(seEnvioCorreo, respuesta.Enviado);
         }
+
+        [Fact]
+        public void AgregarMensaje_Excepcion() 
+        {
+            //Arrange
+            var sut = new MensajesClientesService(clnSrvMock, corSrvMock, msgRepo);
+
+            //Act and Assert
+            var excp = Assert.Throws<Exception>(() => sut.AddMensaje(Guid.NewGuid(), null, null));
+            Assert.Equal("Titulo no puede ser null", excp.Message);
+        }
     }
 }
