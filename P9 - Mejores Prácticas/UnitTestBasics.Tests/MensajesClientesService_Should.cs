@@ -7,17 +7,17 @@ using System.Collections.Generic;
 namespace UnitTestBasics.Tests
 {
     //MensajesClientes_Should_Inline.cs
-    public class MensajesClientesService_Should_Inline
+    public class MensajesClientesService_Should
     {    
         [Fact]
-        public void AgregarMensaje_HappyPath(int arrayId, bool seEnvioCorreo)
+        public void AgregarMensaje_HappyPath()
         {
             //Arrange
-            var idCliente = clientes[arrayId].IdCliente;
+            var idCliente = Guid.NewGuid();
             var titulo = "Bienvenido a nuestro Servicio.";
             var contenido = "Hola. Muchas gracias por usar nuestro servicio.";
 
-            var sut = new MensajesClientesService(clnSrvMock, corSrvMock, msgRepo);
+            var sut = new MensajesClientesService(msgRepo);
 
             //Act
             var respuesta = sut.AddMensaje(idCliente, titulo, contenido);
@@ -26,7 +26,7 @@ namespace UnitTestBasics.Tests
             Assert.Equal(titulo, respuesta.Titulo);
             Assert.Equal(contenido, respuesta.Contenido);
             Assert.Equal(idCliente, respuesta.IdCliente);
-            Assert.Equal(seEnvioCorreo, respuesta.Enviado);
+            Assert.True(respuesta.Enviado);
         }
     }
 }

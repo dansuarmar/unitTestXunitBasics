@@ -22,6 +22,7 @@ namespace ClaseExterna
                 Contenido = Contenido,
                 IdMensaje = Guid.NewGuid(),
                 FechaMensaje = DateTime.Now,
+                Enviado = true;
             };
 
             mensajesRepository.Add(msgRes);
