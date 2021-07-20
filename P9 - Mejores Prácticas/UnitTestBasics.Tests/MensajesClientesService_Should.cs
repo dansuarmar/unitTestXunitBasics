@@ -6,21 +6,25 @@ using System.Collections.Generic;
 
 namespace UnitTestBasics.Tests
 {
-    //MensajesClientes_Should_Inline.cs
+    //MensajesClientes_Should.cs
     public class MensajesClientesService_Should
     {
-        [Fact]
-        public void AgregarMensaje_HappyPath()
+        Mock<MensajeRepository> msgRepoMock;
+
+        public MensajesClientesService_Should() 
         {
-            //Arrange
-            var msgRepoMock = new Mock<MensajeRepository>();
             msgRepoMock.Setup(x => x.Add(It.IsAny<Mensaje>())).Returns(
-                (Mensaje mensaje) => 
+                (Mensaje mensaje) =>
                 {
                     mensaje.IdMensaje = Guid.NewGuid();
                     return mensaje;
                 });
+        }
 
+        [Fact]
+        public void AgregarMensaje_HappyPath()
+        {
+            //Arrange
             var idCliente = Guid.NewGuid();
             var titulo = "Bienvenido a nuestro Servicio.";
             var contenido = "Hola. Muchas gracias por usar nuestro servicio.";
@@ -43,20 +47,11 @@ namespace UnitTestBasics.Tests
         public void AgregarMensaje_Excepcion()
         {
             //Arrange
-            var msgRepoMock = new Mock<MensajeRepository>();
-            msgRepoMock.Setup(x => x.Add(It.IsAny<Mensaje>())).Returns(
-                (Mensaje mensaje) =>
-                {
-                    mensaje.IdMensaje = Guid.NewGuid();
-                    return mensaje;
-                });
-
             var sut = new MensajesClientesService(msgRepoMock.Object);
 
             //Act and Assert
             var excp = Assert.Throws<Exception>(() => sut.AddMensaje(Guid.NewGuid(), null, null));
             Assert.Equal("Titulo no puede ser null", excp.Message);
         }
-
     }
 }
